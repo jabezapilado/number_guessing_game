@@ -130,4 +130,3 @@ SAVE_GAME() {
 
 
 INPUT_NAME
-s
