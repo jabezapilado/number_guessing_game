@@ -104,29 +104,29 @@ CHECK_ANSWER() {
 
 }
 
-SAVE_USER() {
-  USER_NAME=$1 
-  GUESS_COUNT=$2
-
-  CHECK_NAME=$($PSQL "SELECT username FROM users WHERE username='$USER_NAME';")
-  if [[ -z $CHECK_NAME ]]
-  then
-    INSERT_NEW_USER=$($PSQL "INSERT INTO users(username, frequent_games) VALUES('$USER_NAME',1);")
-  else
-    GET_GAME_PLAYED=$(( $($PSQL "SELECT frequent_games FROM users WHERE username='$USER_NAME';") + 1))
-    UPDATE_EXIST_USER=$($PSQL "UPDATE users SET frequent_games=$GET_GAME_PLAYED WHERE username='$USER_NAME';")
-  fi
-  SAVE_GAME $USER_NAME $GUESS_COUNT
-}
-
-# SAVE_GAME() {
+# SAVE_USER() {
 #   USER_NAME=$1 
-#   NUMBER_OF_GUESSES=$2
+#   GUESS_COUNT=$2
 
-#   USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USER_NAME';")
-#   INSERT_GAME=$($PSQL "INSERT INTO games(user_id, best_guess) VALUES($USER_ID, $NUMBER_OF_GUESSES);")
-#   USER_NAME=$($PSQL "SELECT username FROM users WHERE user_id=$USER_ID;")
+#   CHECK_NAME=$($PSQL "SELECT username FROM users WHERE username='$USER_NAME';")
+#   if [[ -z $CHECK_NAME ]]
+#   then
+#     INSERT_NEW_USER=$($PSQL "INSERT INTO users(username, frequent_games) VALUES('$USER_NAME',1);")
+#   else
+#     GET_GAME_PLAYED=$(( $($PSQL "SELECT frequent_games FROM users WHERE username='$USER_NAME';") + 1))
+#     UPDATE_EXIST_USER=$($PSQL "UPDATE users SET frequent_games=$GET_GAME_PLAYED WHERE username='$USER_NAME';")
+#   fi
+#   SAVE_GAME $USER_NAME $GUESS_COUNT
 # }
 
+SAVE_GAME() {
+  USER_NAME=$1 
+  NUMBER_OF_GUESSES=$2
 
-# INPUT_NAME
+  USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USER_NAME';")
+  INSERT_GAME=$($PSQL "INSERT INTO games(user_id, best_guess) VALUES($USER_ID, $NUMBER_OF_GUESSES);")
+  USER_NAME=$($PSQL "SELECT username FROM users WHERE user_id=$USER_ID;")
+}
+
+
+INPUT_NAME
