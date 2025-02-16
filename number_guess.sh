@@ -119,14 +119,14 @@ SAVE_USER() {
   SAVE_GAME $USER_NAME $GUESS_COUNT
 }
 
-SAVE_GAME() {
-  USER_NAME=$1 
-  NUMBER_OF_GUESSES=$2
+# SAVE_GAME() {
+#   USER_NAME=$1 
+#   NUMBER_OF_GUESSES=$2
 
-  USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USER_NAME';")
-  INSERT_GAME=$($PSQL "INSERT INTO games(user_id, best_guess) VALUES($USER_ID, $NUMBER_OF_GUESSES);")
-  USER_NAME=$($PSQL "SELECT username FROM users WHERE user_id=$USER_ID;")
-}
+#   USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USER_NAME';")
+#   INSERT_GAME=$($PSQL "INSERT INTO games(user_id, best_guess) VALUES($USER_ID, $NUMBER_OF_GUESSES);")
+#   USER_NAME=$($PSQL "SELECT username FROM users WHERE user_id=$USER_ID;")
+# }
 
 
-INPUT_NAME
+# INPUT_NAME
